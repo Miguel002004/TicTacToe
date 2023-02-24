@@ -28,7 +28,7 @@ game_buttons.forEach(element => {
             element.dataset.status = 1;
         }
         element.style.pointerEvents = "none";
-        validateCombinations('v');
+        validateCombinations('s');
     } 
 });
 
