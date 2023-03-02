@@ -70,14 +70,14 @@ function validateH(arr){
             }
             if(count_O >= 3)
             {
-                alert('ganó O');
+                //alert('ganó O');
                 console.log('ganó O');
-                resetGame();
+                resetGame('O');
             }
             if(count_X >= 3){
-                alert('ganó X');
+                //alert('ganó X');
                 console.log('ganó X');
-                resetGame();
+                resetGame('X');
             }
         }
     }
@@ -99,14 +99,14 @@ function validateV(arr){
             }
             if(count_O >= 3)
             {
-                alert('ganó O');
+                //alert('ganó O');
                 console.log('ganó O');
-                resetGame();
+                resetGame('O');
             }
             if(count_X >= 3){
-                alert('ganó X');
+                //alert('ganó X');
                 console.log('ganó X');
-                resetGame();
+                resetGame('X');
             }
         }
     }
@@ -123,14 +123,14 @@ function validateDiagonal(arr){
         }
         if(count_O >= 3)
         {
-            alert('ganó O');
+            //alert('ganó O');
             console.log('ganó O');
-            resetGame();
+            resetGame('O');
         }
         if(count_X >= 3){
-            alert('ganó X');
+            //alert('ganó X');
             console.log('ganó X');
-            resetGame();
+            resetGame('X');
         }
     }
 } 
@@ -147,14 +147,14 @@ function validateDiagonal_inv(arr){
         }
         if(count_O >= 3)
         {
-            alert('ganó O');
+            //alert('ganó O');
             console.log('ganó O');
-            resetGame();
+            resetGame('O');
         }
         if(count_X >= 3){
-            alert('ganó X');
+            //alert('ganó X');
             console.log('ganó X');
-            resetGame();
+            resetGame('X');
         }
         cont --;
     }
@@ -189,7 +189,7 @@ function invert_array(array){
     });
     console.log(array_copy);
 }
-function resetGame(){
+function resetGame(player){
     game_buttons.forEach((elm, index) => {
         elm.dataset.status = "";
         elm.innerHTML='';
@@ -207,6 +207,7 @@ function resetGame(){
 
     player_two.classList.remove('scale-1-5-player');
     player_two.classList.remove('scale-1-player');
+    winAnimation(player);
 }
 function turnAnimation(flag){
     if(flag){
@@ -237,4 +238,16 @@ function turnAnimation(flag){
         player_two.classList.add('scale-1-5-player');
     }
     
+}
+
+function winAnimation(player){
+    let player_w = document.querySelector('#player_won');
+    let player_w_container = document.querySelector('.container-win-message');
+
+    player_w_container.style.display = "flex";
+    player_w.textContent = `ganó el jugador ${player}`;
+}
+function acceptButton(){
+    let player_w_container = document.querySelector('.container-win-message');
+    player_w_container.style.display = "none";
 }

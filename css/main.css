@@ -176,7 +176,34 @@ body {
     gap: 15px;
     z-index: 10;
 }
-
+.container-win-message{
+    z-index: 20;
+    width: 250px;
+    height: 60px;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    background-color: #A9D0F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.accept-button{
+    height: 20px;
+    width: 80%;
+    display: flex;
+    cursor: pointer;
+    border: 1px solid #508CC5;
+    justify-content: center;
+    transition: 0.3s;
+}
+.accept-button:hover{
+    transform: scale(1.2);
+    background-color: #508CC5;
+}
 .game-button {
     height: 100%;
     width: 100%;
