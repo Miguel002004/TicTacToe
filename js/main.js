@@ -28,11 +28,11 @@ game_buttons.forEach(element => {
             element.dataset.status = 1;
         }
         element.style.pointerEvents = "none";
-        validateCombinations('s');
+        validateCombinations();
     } 
 });
 
-function validateCombinations(recorrido){    
+function validateCombinations(){    
     let game_elements_array = [];
     let game_element_tmp_array = [];
     //let count_itm = 0;
@@ -43,28 +43,116 @@ function validateCombinations(recorrido){
             game_element_tmp_array = [];
         }
     });
+    validateH(game_elements_array);
+    validateV(game_elements_array);
+    validateDiagonal(game_elements_array);
+    validateDiagonal_inv(game_elements_array);
     console.log(game_elements_array);
-    //recorre el array 
+}
+/**
+ * Recorre la matriz horizontalmente
+ * @param {array} arr 
+ */
+function validateH(arr){
     for(let x = 0; x < 3; x++){
         let count_O = 0;
         let count_X = 0;
         for(let y = 0; y < 3; y++){
-            if( game_elements_array[recorrido=='v' ? y : x][recorrido == 'v' ? x : y] === '0'){
+            if(arr[x][y] === '0'){
                 count_O ++;
             }
-            if(game_elements_array[x][y] === '1'){
+            if(arr[x][y] === '1'){
                 count_X ++;
             }
             if(count_O >= 3)
             {
+                alert('ganó O');
                 console.log('ganó O');
-                //resetGame();
+                resetGame();
             }
             if(count_X >= 3){
+                alert('ganó X');
                 console.log('ganó X');
-                //resetGame();
+                resetGame();
             }
         }
+    }
+}
+/**
+ * Recorre la matriz verticalmente
+ * @param {array} arr 
+ */
+function validateV(arr){
+    for(let x = 0; x < 3; x++){
+        let count_O = 0;
+        let count_X = 0;
+        for(let y = 0; y < 3; y++){
+            if(arr[y][x] === '0'){
+                count_O ++;
+            }
+            if(arr[y][x] === '1'){
+                count_X ++;
+            }
+            if(count_O >= 3)
+            {
+                alert('ganó O');
+                console.log('ganó O');
+                resetGame();
+            }
+            if(count_X >= 3){
+                alert('ganó X');
+                console.log('ganó X');
+                resetGame();
+            }
+        }
+    }
+}
+function validateDiagonal(arr){
+    let count_O = 0;
+    let count_X = 0;
+    for(let x = 0; x < 3; x++){
+        if(arr[x][x] === '0'){
+            count_O ++;
+        }
+        if(arr[x][x] === '1'){
+            count_X ++;
+        }
+        if(count_O >= 3)
+        {
+            alert('ganó O');
+            console.log('ganó O');
+            resetGame();
+        }
+        if(count_X >= 3){
+            alert('ganó X');
+            console.log('ganó X');
+            resetGame();
+        }
+    }
+} 
+function validateDiagonal_inv(arr){
+    let count_O = 0;
+    let count_X = 0;
+    let cont = 2;
+    for(let x = 0; x < 3; x++){
+        if(arr[x][cont] === '0'){
+            count_O ++;
+        }
+        if(arr[x][cont] === '1'){
+            count_X ++;
+        }
+        if(count_O >= 3)
+        {
+            alert('ganó O');
+            console.log('ganó O');
+            resetGame();
+        }
+        if(count_X >= 3){
+            alert('ganó X');
+            console.log('ganó X');
+            resetGame();
+        }
+        cont --;
     }
 }
 function validatePattern(game_elemnt){
@@ -96,4 +184,16 @@ function invert_array(array){
         array_copy.push(array_item);
     });
     console.log(array_copy);
+}
+function resetGame(){
+    game_buttons.forEach((elm, index) => {
+        elm.dataset.status = "";
+        elm.innerHTML='';
+        elm.style.pointerEvents = "auto";
+    });
+}
+function turnAnimation(){
+    let player_one = document.querySelector('player_one');
+    player_one.style.filter = 'grayscale(1)';
+    player_one.style.webkitFilter = 'grayscale(1)';
 }
