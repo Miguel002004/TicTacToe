@@ -2,6 +2,9 @@ const get_width_game = document.querySelector('.container-2').clientWidth;
 let calculate_width_game = Math.sqrt((get_width_game*get_width_game)*2);
 document.documentElement.style.setProperty('--width-animation', calculate_width_game+'px');
 
+let player_one = document.querySelector('#player_one');
+let player_two = document.querySelector('#player_two');
+
 let layout1 = document.querySelector(".layout1-container");
 let layout2 = document.querySelector(".layout2-container");
 document.querySelector(".button-start-game").onclick=()=>{
@@ -27,6 +30,7 @@ game_buttons.forEach(element => {
             game_array.push(1);
             element.dataset.status = 1;
         }
+        turnAnimation(state_flag);
         element.style.pointerEvents = "none";
         validateCombinations();
     } 
@@ -191,9 +195,46 @@ function resetGame(){
         elm.innerHTML='';
         elm.style.pointerEvents = "auto";
     });
+    player_one.style.filter = 'grayscale(0)';
+    player_one.style.webkitFilter = 'grayscale(0)';
+
+
+    player_two.style.filter = 'grayscale(0)';
+    player_two.style.webkitFilter = 'grayscale(0)';
+
+    player_one.classList.remove('scale-1-5-player');
+    player_one.classList.remove('scale-1-player');
+
+    player_two.classList.remove('scale-1-5-player');
+    player_two.classList.remove('scale-1-player');
 }
-function turnAnimation(){
-    let player_one = document.querySelector('player_one');
-    player_one.style.filter = 'grayscale(1)';
-    player_one.style.webkitFilter = 'grayscale(1)';
+function turnAnimation(flag){
+    if(flag){
+        player_two.style.filter = 'grayscale(1)';
+        player_two.style.webkitFilter = 'grayscale(1)';
+
+        player_one.style.filter = 'grayscale(0)';
+        player_one.style.webkitFilter = 'grayscale(0)';
+
+        player_one.classList.remove('scale-1-player');
+        player_one.classList.add('scale-1-5-player');
+
+        player_two.classList.remove('scale-1-5-player');
+        player_two.classList.add('scale-1-player');
+    }
+    else{
+        player_one.style.filter = 'grayscale(1)';
+        player_one.style.webkitFilter = 'grayscale(1)';
+
+        player_two.style.filter = 'grayscale(0)';
+        player_two.style.webkitFilter = 'grayscale(0)';
+
+        player_one.classList.remove('scale-1-5-player');
+        player_one.classList.add('scale-1-player');
+
+
+        player_two.classList.remove('scale-1-player');
+        player_two.classList.add('scale-1-5-player');
+    }
+    
 }
