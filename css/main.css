@@ -1,5 +1,6 @@
 :root {
     --width-animation: 0px;
+    --transform-rotate: 45deg;
 }
 
 body {
@@ -148,9 +149,9 @@ body {
     width: var(--width-animation);
     height: 30px;
     border-radius: 30px;
-    z-index: 99;
+    z-index: 15;
     background-color: red;
-    animation: example-line-animation 1.5s cubic-bezier(0.52, -0.19, 1, 1);
+    animation: example-line-animation 0.5s cubic-bezier(0.52, -0.19, 1, 1);
 }
 
 .example-line-parent {
@@ -158,8 +159,10 @@ body {
     height: 30px;
     border-radius: 30px;
     position: absolute;
-    z-index: 2;
-    transform: rotate(45deg);
+    top: 50%;
+    right: 50%;
+    z-index: 14;
+    transform: translate(50%, -50%) rotate(var(--transform-rotate));
 }
 
 .container-game {

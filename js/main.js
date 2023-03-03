@@ -1,4 +1,4 @@
-const get_width_game = document.querySelector('.container-2').clientWidth;
+const get_width_game = document.querySelector('.container-game').clientWidth;
 let calculate_width_game = Math.sqrt((get_width_game*get_width_game)*2);
 document.documentElement.style.setProperty('--width-animation', calculate_width_game+'px');
 
@@ -72,12 +72,12 @@ function validateH(arr){
             {
                 //alert('ganó O');
                 console.log('ganó O');
-                resetGame('O');
+                resetGame('O', {'position':'h','location':x});
             }
             if(count_X >= 3){
                 //alert('ganó X');
                 console.log('ganó X');
-                resetGame('X');
+                resetGame('X', {'position':'h','location':x});
             }
         }
     }
@@ -101,12 +101,12 @@ function validateV(arr){
             {
                 //alert('ganó O');
                 console.log('ganó O');
-                resetGame('O');
+                resetGame('O', {'position':'v','location':x});
             }
             if(count_X >= 3){
                 //alert('ganó X');
                 console.log('ganó X');
-                resetGame('X');
+                resetGame('X', {'position':'v','location':x});
             }
         }
     }
@@ -125,12 +125,12 @@ function validateDiagonal(arr){
         {
             //alert('ganó O');
             console.log('ganó O');
-            resetGame('O');
+            resetGame('O', {'position':'d','location':3});
         }
         if(count_X >= 3){
             //alert('ganó X');
             console.log('ganó X');
-            resetGame('X');
+            resetGame('X', {'position':'d','location':3});
         }
     }
 } 
@@ -149,12 +149,12 @@ function validateDiagonal_inv(arr){
         {
             //alert('ganó O');
             console.log('ganó O');
-            resetGame('O');
+            resetGame('O', {'position':'di','location':4});
         }
         if(count_X >= 3){
             //alert('ganó X');
             console.log('ganó X');
-            resetGame('X');
+            resetGame('X', {'position':'di','location':4});
         }
         cont --;
     }
@@ -189,7 +189,7 @@ function invert_array(array){
     });
     console.log(array_copy);
 }
-function resetGame(player){
+function resetGame(player, position){
     game_buttons.forEach((elm, index) => {
         elm.dataset.status = "";
         elm.innerHTML='';
@@ -207,7 +207,8 @@ function resetGame(player){
 
     player_two.classList.remove('scale-1-5-player');
     player_two.classList.remove('scale-1-player');
-    winAnimation(player);
+    acceptAnimation(player);
+    winAnimation(position);
 }
 function turnAnimation(flag){
     if(flag){
@@ -240,14 +241,35 @@ function turnAnimation(flag){
     
 }
 
-function winAnimation(player){
+function acceptAnimation(player){
     let player_w = document.querySelector('#player_won');
     let player_w_container = document.querySelector('.container-win-message');
-
+    
     player_w_container.style.display = "flex";
     player_w.textContent = `ganó el jugador ${player}`;
 }
 function acceptButton(){
     let player_w_container = document.querySelector('.container-win-message');
+    let bar_animation = document.querySelector('#bar-animation');
+
     player_w_container.style.display = "none";
+    bar_animation.style.display = "none";
+}
+/**
+ * crea la animación de la linea para la posisción a del jugador ganador
+ */
+function winAnimation(position){
+    let bar_animation = document.querySelector('#bar-animation');
+    bar_animation.style.display = "block";
+    let postn = {
+        'v':90,
+        'h':0,
+        'd':45,
+        'di':135
+    };
+    
+    //console.log(postn[position.position]);
+    document.documentElement.style.setProperty('--transform-rotate', `${postn[position.position]}deg`);
+    console.log(position);
+
 }
