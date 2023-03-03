@@ -1,6 +1,5 @@
 const get_width_game = document.querySelector('.container-game').clientWidth;
 let calculate_width_game = Math.sqrt((get_width_game*get_width_game)*2);
-document.documentElement.style.setProperty('--width-animation', calculate_width_game+'px');
 
 let player_one = document.querySelector('#player_one');
 let player_two = document.querySelector('#player_two');
@@ -261,15 +260,45 @@ function acceptButton(){
 function winAnimation(position){
     let bar_animation = document.querySelector('#bar-animation');
     bar_animation.style.display = "block";
+
     let postn = {
         'v':90,
         'h':0,
         'd':45,
         'di':135
     };
+
+    let horizontalP = {
+        0:'25%',
+        1:'50%',
+        2:'77%'
+    }
+
+    let verticalP = {
+        0:'62%',
+        1:'50%',
+        2:'38%'
+    }
     
+    if(position.position === 'v'){
+        //console.log(verticalP[position.location]);
+        document.documentElement.style.setProperty('--top-line', '50%');
+        document.documentElement.style.setProperty('--right-line', verticalP[position.location]);
+    }
+    if(position.position === 'h'){
+        //console.log(horizontalP[position.location]);
+        document.documentElement.style.setProperty('--right-line', '50%');
+        document.documentElement.style.setProperty('--top-line', horizontalP[position.location]);
+    }
+
+    if(position.position === 'v' || position.position === 'h'){
+        document.documentElement.style.setProperty('--width-animation', `${get_width_game}px`);
+    }
+    else{
+        document.documentElement.style.setProperty('--right-line', '50%');
+        document.documentElement.style.setProperty('--top-line', '50%');
+        document.documentElement.style.setProperty('--width-animation', `${calculate_width_game}px`);
+    }
     //console.log(postn[position.position]);
     document.documentElement.style.setProperty('--transform-rotate', `${postn[position.position]}deg`);
-    console.log(position);
-
 }

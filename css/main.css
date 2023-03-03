@@ -1,6 +1,8 @@
 :root {
     --width-animation: 0px;
     --transform-rotate: 45deg;
+    --top-line:50%;
+    --right-line:50%;
 }
 
 body {
@@ -159,8 +161,8 @@ body {
     height: 30px;
     border-radius: 30px;
     position: absolute;
-    top: 50%;
-    right: 50%;
+    top: var(--top-line);
+    right: var(--right-line);
     z-index: 14;
     transform: translate(50%, -50%) rotate(var(--transform-rotate));
 }
