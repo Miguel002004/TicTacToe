@@ -218,6 +218,10 @@ body {
     justify-content: center;
     cursor: pointer;
 }
+.game-button img{
+    width: 100%;
+    height: auto;
+}
 .circle{
     position: absolute;
     left: 100px;
@@ -233,4 +237,53 @@ body {
     height: 100px;
     width: 100px;
     cursor: pointer;
+}
+.circle img, .cross img{
+    width: 100%;
+    height: auto;
+}
+
+
+@media (max-width: 600px) {
+    .container-game {
+        width: 500px;
+        height: 500px;
+    }
+    .circle, .cross{
+        height: 100px;
+        width: 100px;
+    }
+}
+
+@media (max-width: 500px) {
+    .container-game {
+        width: 400px;
+        height: 400px;
+    }
+    .circle, .cross{
+        height: 75px;
+        width: 75px;
+    }
+}
+
+@media (max-width: 400px) {
+    .container-game {
+        width: 300px;
+        height: 300px;
+    }
+    .circle, .cross{
+        height: 65px;
+        width: 65px; 
+    }
+}
+
+@media (max-width: 300px) {
+    .container-game {
+        width: 200px;
+        height: 200px;
+    }
+    .circle, .cross{
+        height: 50px;
+        width: 50px;
+    }
 }

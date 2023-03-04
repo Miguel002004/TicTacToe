@@ -281,12 +281,10 @@ function winAnimation(position){
     }
     
     if(position.position === 'v'){
-        //console.log(verticalP[position.location]);
         document.documentElement.style.setProperty('--top-line', '50%');
         document.documentElement.style.setProperty('--right-line', verticalP[position.location]);
     }
     if(position.position === 'h'){
-        //console.log(horizontalP[position.location]);
         document.documentElement.style.setProperty('--right-line', '50%');
         document.documentElement.style.setProperty('--top-line', horizontalP[position.location]);
     }
@@ -299,6 +297,5 @@ function winAnimation(position){
         document.documentElement.style.setProperty('--top-line', '50%');
         document.documentElement.style.setProperty('--width-animation', `${calculate_width_game}px`);
     }
-    //console.log(postn[position.position]);
     document.documentElement.style.setProperty('--transform-rotate', `${postn[position.position]}deg`);
 }
