@@ -1,4 +1,5 @@
 const get_width_game = document.querySelector('.container-game').clientWidth;
+console.log(`ancho del tablero: ${get_width_game}`);
 let calculate_width_game = Math.sqrt((get_width_game*get_width_game)*2);
 
 let player_one = document.querySelector('#player_one');
@@ -260,7 +261,7 @@ function acceptButton(){
 function winAnimation(position){
     let bar_animation = document.querySelector('#bar-animation');
     bar_animation.style.display = "block";
-
+    const animation_position = get_width_game / 6;
     let postn = {
         'v':90,
         'h':0,
@@ -269,16 +270,17 @@ function winAnimation(position){
     };
 
     let horizontalP = {
-        0:'25%',
-        1:'50%',
-        2:'77%'
+        0:`${animation_position*1}px`,
+        1:`${animation_position*3}px`,
+        2:`${animation_position*5}px`
     }
 
     let verticalP = {
-        0:'62%',
-        1:'50%',
-        2:'38%'
+        0:`${animation_position*5}px`,
+        1:`${animation_position*3}px`,
+        2:`${animation_position*1}px`
     }
+    console.log(position.location)
     
     if(position.position === 'v'){
         document.documentElement.style.setProperty('--top-line', '50%');
