@@ -72,12 +72,12 @@ function validateH(arr){
             {
                 //alert('ganó O');
                 console.log('ganó O');
-                resetGame('O', {'position':'h','location':x});
+                winAnimation('O', {'position':'h','location':x});
             }
             if(count_X >= 3){
                 //alert('ganó X');
                 console.log('ganó X');
-                resetGame('X', {'position':'h','location':x});
+                winAnimation('X', {'position':'h','location':x});
             }
         }
     }
@@ -101,12 +101,12 @@ function validateV(arr){
             {
                 //alert('ganó O');
                 console.log('ganó O');
-                resetGame('O', {'position':'v','location':x});
+                winAnimation('O', {'position':'v','location':x});
             }
             if(count_X >= 3){
                 //alert('ganó X');
                 console.log('ganó X');
-                resetGame('X', {'position':'v','location':x});
+                winAnimation('X', {'position':'v','location':x});
             }
         }
     }
@@ -125,12 +125,12 @@ function validateDiagonal(arr){
         {
             //alert('ganó O');
             console.log('ganó O');
-            resetGame('O', {'position':'d','location':3});
+            winAnimation('O', {'position':'d','location':3});
         }
         if(count_X >= 3){
             //alert('ganó X');
             console.log('ganó X');
-            resetGame('X', {'position':'d','location':3});
+            winAnimation('X', {'position':'d','location':3});
         }
     }
 } 
@@ -149,12 +149,12 @@ function validateDiagonal_inv(arr){
         {
             //alert('ganó O');
             console.log('ganó O');
-            resetGame('O', {'position':'di','location':4});
+            winAnimation('O', {'position':'di','location':4});
         }
         if(count_X >= 3){
             //alert('ganó X');
             console.log('ganó X');
-            resetGame('X', {'position':'di','location':4});
+            winAnimation('X', {'position':'di','location':4});
         }
         cont --;
     }
@@ -189,7 +189,7 @@ function invert_array(array){
     });
     console.log(array_copy);
 }
-function resetGame(player, position){
+function resetGame(){
     game_buttons.forEach((elm, index) => {
         elm.dataset.status = "";
         elm.innerHTML='';
@@ -207,8 +207,10 @@ function resetGame(player, position){
 
     player_two.classList.remove('scale-1-5-player');
     player_two.classList.remove('scale-1-player');
-    acceptAnimation(player);
-    winAnimation(position);
+    stopEvents(false);
+    console.log('test');
+    //acceptAnimation(player);
+    //winAnimation(position);
 }
 function turnAnimation(flag){
     if(flag){
@@ -246,7 +248,8 @@ function acceptAnimation(player){
     let player_w_container = document.querySelector('.container-win-message');
     
     player_w_container.style.display = "flex";
-    player_w.textContent = `ganó el jugador ${player}`;
+    player_w.textContent = `Ganó el jugador ${player}`;
+    stopEvents(true);
 }
 function acceptButton(){
     let player_w_container = document.querySelector('.container-win-message');
@@ -254,11 +257,12 @@ function acceptButton(){
 
     player_w_container.style.display = "none";
     bar_animation.style.display = "none";
+    resetGame();
 }
 /**
  * crea la animación de la linea para la posisción a del jugador ganador
  */
-function winAnimation(position){
+function winAnimation(player, position){
     let bar_animation = document.querySelector('#bar-animation');
     bar_animation.style.display = "block";
     const animation_position = get_width_game / 6;
@@ -300,4 +304,15 @@ function winAnimation(position){
         document.documentElement.style.setProperty('--width-animation', `${calculate_width_game}px`);
     }
     document.documentElement.style.setProperty('--transform-rotate', `${postn[position.position]}deg`);
+    acceptAnimation(player)
 }
+
+function stopEvents(state){
+    if(state){
+        game_buttons.forEach(element => element.style.pointerEvents = "none");
+    }
+    else{
+        game_buttons.forEach(element => element.style.pointerEvents = "auto");
+    }
+}
+    
