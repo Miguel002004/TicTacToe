@@ -315,4 +315,7 @@ function stopEvents(state){
         game_buttons.forEach(element => element.style.pointerEvents = "auto");
     }
 }
+io.on('connect', (socket) => {
+    console.log('Un jugador se ha conectado!');
+  });
     
