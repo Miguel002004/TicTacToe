@@ -51,7 +51,8 @@ async function validateCombinations() {
     const vv = await validateV(game_elements_array);
     const vd = await validateDiagonal(game_elements_array);
     const vdi = await validateDiagonal_inv(game_elements_array);
-    if (!vh && !vv && !vd && !vdi && cont > 8) {
+    if (!vh && !vv && !vd && !vdi && cont >= 9) {
+        console.log({'vh':vh, 'vv':vv, 'vd':vd, 'vdi':vdi, 'cont': cont})
         acceptAnimation('y');
     }
     console.log(game_elements_array);
@@ -181,6 +182,7 @@ function validateDiagonal_inv(arr) {
                 resolve(false);
             }
             cont_--;
+            resolve(true);
         }
     });
 }
@@ -271,7 +273,7 @@ function turnAnimation(flag) {
 function acceptAnimation(player) {
     let player_w = document.querySelector('#player_won');
     let player_w_container = document.querySelector('.container-win-message');
-
+    cont = 0;
     player_w_container.style.display = "flex";
     player_w.textContent = `Ganó el jugador ${player}`;
     if (player === 'y') {
@@ -291,6 +293,7 @@ function acceptButton() {
  * crea la animación de la linea para la posisción a del jugador ganador
  */
 function winAnimation(player, position) {
+    acceptAnimation(player);
     let bar_animation = document.querySelector('#bar-animation');
     bar_animation.style.display = "block";
     const animation_position = get_width_game / 6;
@@ -332,7 +335,6 @@ function winAnimation(player, position) {
         document.documentElement.style.setProperty('--width-animation', `${calculate_width_game}px`);
     }
     document.documentElement.style.setProperty('--transform-rotate', `${postn[position.position]}deg`);
-    acceptAnimation(player)
 }
 
 function stopEvents(state) {
