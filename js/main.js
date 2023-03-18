@@ -1,4 +1,4 @@
-const get_width_game = document.querySelector('.container-game').clientWidth;
+let get_width_game = document.querySelector('.container-game').clientWidth;
 console.log(`ancho del tablero: ${get_width_game}`);
 let calculate_width_game = Math.sqrt((get_width_game * get_width_game) * 2);
 
@@ -15,6 +15,7 @@ let state_flag = false;
 var game_buttons = document.querySelectorAll(".game-button");
 let game_array = [];
 let cont = 0;
+turnAnimation(state_flag);//inicializar la animación para que el usuario sepa que turno es
 game_buttons.forEach(element => {
     element.onclick = () => {
         if (state_flag) {
@@ -235,6 +236,7 @@ function resetGame() {
     player_two.classList.remove('scale-1-5-player');
     player_two.classList.remove('scale-1-player');
     stopEvents(false);
+    turnAnimation(state_flag);//inicializar la animación para que el usuario sepa que turno es
     //acceptAnimation(player);
     //winAnimation(position);
     cont = 0;
@@ -275,9 +277,9 @@ function acceptAnimation(player) {
     let player_w_container = document.querySelector('.container-win-message');
     cont = 0;
     player_w_container.style.display = "flex";
-    player_w.textContent = `Ganó el jugador ${player}`;
+    player_w.textContent = `Player '${player}' won`;
     if (player === 'y') {
-        player_w.textContent = `Empate`;
+        player_w.textContent = `Tie`;
     }
     stopEvents(true);
 }
@@ -294,6 +296,8 @@ function acceptButton() {
  */
 function winAnimation(player, position) {
     acceptAnimation(player);
+    get_width_game = document.querySelector('.container-game').clientWidth;
+    let calculate_width_game = Math.sqrt((get_width_game * get_width_game) * 2);
     let bar_animation = document.querySelector('#bar-animation');
     bar_animation.style.display = "block";
     const animation_position = get_width_game / 6;
